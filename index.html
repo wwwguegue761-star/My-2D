@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My 2D Server</title>
+</head>
+<body>
+
+<h2>2D Result</h2>
+
+<label>Admin Password</label><br>
+<input type="password" id="password" placeholder="Password">
+<button onclick="login()">Login</button>
+
+<p id="msg"></p>
+
+<hr>
+
+<h3>မနက် 2D</h3>
+<div id="morning">75</div>
+<input type="text" id="morningInput" maxlength="2" placeholder="မနက်ဂဏန်း">
+<button onclick="changeMorning()">မနက်ပြောင်းမည်</button>
+
+<hr>
+
+<h3>ညနေ 2D</h3>
+<div id="evening">25</div>
+<input type="text" id="eveningInput" maxlength="2" placeholder="ညနေဂဏန်း">
+<button onclick="changeEvening()">ညနေပြောင်းမည်</button>
+
+<script>
+let loggedIn = false;
+
+function login() {
+  let pass = document.getElementById("password").value;
+
+  if (pass === "1234") {
+    loggedIn = true;
+    document.getElementById("msg").innerHTML = "✅ Login အောင်မြင်ပါသည်";
+  } else {
+    document.getElementById("msg").innerHTML = "❌ Password မှားနေပါသည်";
+  }
+}
+
+function changeMorning() {
+  if (!loggedIn) {
+    alert("အရင် Login ဝင်ပါ");
+    return;
+  }
+
+  let num = document.getElementById("morningInput").value;
+  document.getElementById("morning").innerHTML = num;
+  localStorage.setItem("morning2D", num);
+}
+
+function changeEvening() {
+  if (!loggedIn) {
+    alert("အရင် Login ဝင်ပါ");
+    return;
+  }
+
+  let num = document.getElementById("eveningInput").value;
+  document.getElementById("evening").innerHTML = num;
+  localStorage.setItem("evening2D", num);
+}
+
+window.onload = function () {
+  let morning = localStorage.getItem("morning2D");
+  let evening = localStorage.getItem("evening2D");
+
+  if (morning) {
+    document.getElementById("morning").innerHTML = morning;
+  }
+
+  if (evening) {
+    document.getElementById("evening").innerHTML = evening;
+  }
+}
+</script>
+
+</body>
+</html>
